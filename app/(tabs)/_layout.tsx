@@ -1,4 +1,6 @@
 import { Link, Tabs } from 'expo-router';
+import { Entypo, Feather, Ionicons } from '@expo/vector-icons'
+
 
 export default function TabLayout() {
   return (
@@ -7,10 +9,39 @@ export default function TabLayout() {
         tabBarActiveTintColor: 'black',
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Home',
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: 'Search',
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Feather name="search" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="orders"
+        options={{
+          title: 'Orders',
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Ionicons name="receipt-outline" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Feather name="user" size={24} color={color} />,
         }}
       />
     </Tabs>
