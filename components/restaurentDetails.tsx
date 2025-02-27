@@ -13,12 +13,9 @@ import ParallaxScrollView from '../components/ParallaxScrollView.js';
 import { AntDesign, FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { Link, useGlobalSearchParams, useNavigation } from 'expo-router';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useAppContext } from 'context/appContext';
 
 const RestaurantDetails = ({ post }) => {
   const { id } = useGlobalSearchParams();
-
-  const { foundMeals, count, totalPrice } = useAppContext();
 
   const navigation = useNavigation();
 
