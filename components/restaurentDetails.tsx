@@ -17,6 +17,10 @@ import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-na
 
 const RestaurantDetails = ({ post }) => {
 
+  const { id } = useGlobalSearchParams();
+
+  const { foundMeals, count, totalPrice } = useAppContext();
+
   const [headerIconColor, setHeaderIconColor] = useState('white');
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
@@ -28,6 +32,33 @@ const RestaurantDetails = ({ post }) => {
   const animatedStyles = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }));
+
+  const handleScroll = (event) => {
+    const scrollPosition = event.nativeEvent.contentOffset.y;
+
+    data.forEach((category, index) => {
+      const sectionTop = index * 260;
+      const sectionBotoom = (index + 1) * 260;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBotoom) {
+        setActiveCategoryIndex(index);
+      }
+    });
+
+    setActiveButtonIndex(activeCategoryIndex);
+
+    if (scrollPosition > 80) {
+      setHeaderIconColor('black');
+      opacity.value = withTiming(1);
+    } else {
+      setHeaderIconColor('white');
+      opacity.value = withTiming(0);
+    }
+  };
+
+  const selectCategory = (index: Number) => {
+    setActiveButtonIndex(index);
+  };
 
 
   const ratingStyle = {
@@ -58,7 +89,7 @@ const RestaurantDetails = ({ post }) => {
       ),
     });
 
-  }, []);
+  }, [headerIconColor]);
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => (
     <Link href={{ pathname: '/modalFood', params: { id: id, itemId: item.id } }} asChild>
@@ -116,7 +147,7 @@ const RestaurantDetails = ({ post }) => {
             <Text className={styles.headerText}>{post.name}</Text>
           </View>
         )}
-        scrollEvent={handleScroll}>
+        scrollEvent={handleScroll}
         <View className={styles.namesContainer}>
           <View className="m-6">
             <View className={styles.titleContainerRow}>
