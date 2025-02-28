@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image } from 'react-native';
 import React from 'react';
 import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import { FontAwesome } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 
 const MarketCard = ({ restaurantData }) => {
 
@@ -11,28 +11,29 @@ const MarketCard = ({ restaurantData }) => {
   };
 
   return (
-      <Pressable className={styles.cardContainer}>
-        <View>
-          <Image
-            source={{ uri: restaurantData.profileImage }}
-            className={styles.cardImage}
-            resizeMode="cover"
-          />
-          <View className={styles.overlay}>
-            <Text className={styles.overlayText}>{restaurantData.delivery} min</Text>
-          </View>
+    <Link href={{ pathname: `${restaurantData.id}`, params: { id: restaurantData.id } }} asChild>
+    <Pressable className={styles.cardContainer}>
+      <View>
+        <Image
+          source={{ uri: restaurantData.profileImage }}
+          className={styles.cardImage}
+          resizeMode="cover"
+        />
+        <View className={styles.overlay}>
+          <Text className={styles.overlayText}>{restaurantData.delivery} min</Text>
         </View>
+      </View>
 
-        <View className={styles.textsContainer}>
-          <Text className={styles.restaurantName}>{restaurantData.name}</Text>
-          <View className={styles.ratingContainer}>
-            <FontAwesome name="star" size={17} color={'black'} />
-            <Text className={styles.rating}>{restaurantData.rating}</Text>
-          </View>
+      <View className={styles.textsContainer}>
+        <Text className={styles.restaurantName}>{restaurantData.name}</Text>
+        <View className={styles.ratingContainer}>
+          <FontAwesome name="star" size={17} color={ratingStyle.color} />
+          <Text className={styles.rating}>{restaurantData.rating}</Text>
         </View>
-        <Text className={styles.price}>{restaurantData.price} €</Text>
-      </Pressable>
-
+      </View>
+      <Text className={styles.price}>{restaurantData.price} €</Text>
+    </Pressable>
+  </Link>
   );
 };
 
