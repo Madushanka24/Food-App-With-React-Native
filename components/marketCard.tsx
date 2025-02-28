@@ -4,28 +4,33 @@ import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
-const MarketCard = ({ }) => {
+const MarketCard = ({ restaurantData }) => {
+
+  const retingstyle = {
+    color: restaurantData.rating <4.5 ?'black' :'#FF8C00'
+  };
+
   return (
       <Pressable className={styles.cardContainer}>
         <View>
           <Image
-            source={{ uri: dummyRestaurantsData[0].profileImage }}
+            source={{ uri: restaurantData.profileImage }}
             className={styles.cardImage}
             resizeMode="cover"
           />
           <View className={styles.overlay}>
-            <Text className={styles.overlayText}>{dummyRestaurantsData[0].delivery} min</Text>
+            <Text className={styles.overlayText}>{restaurantData.delivery} min</Text>
           </View>
         </View>
 
         <View className={styles.textsContainer}>
-          <Text className={styles.restaurantName}>{dummyRestaurantsData[0].name}</Text>
+          <Text className={styles.restaurantName}>{restaurantData.name}</Text>
           <View className={styles.ratingContainer}>
             <FontAwesome name="star" size={17} color={'black'} />
-            <Text className={styles.rating}>{dummyRestaurantsData[0].rating}</Text>
+            <Text className={styles.rating}>{restaurantData.rating}</Text>
           </View>
         </View>
-        <Text className={styles.price}>{dummyRestaurantsData[0].price} €</Text>
+        <Text className={styles.price}>{restaurantData.price} €</Text>
       </Pressable>
 
   );
