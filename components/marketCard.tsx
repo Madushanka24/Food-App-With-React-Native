@@ -4,35 +4,30 @@ import { dummyRestaurantsData } from '~/assets/data/restaurantsData';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
-const MarketCard = ({ restaurantData }) => {
-  const ratingStyle = {
-    color: restaurantData.rating < 4.5 ? 'black' : '#FF8C00',
-  };
-
+const MarketCard = ({ }) => {
   return (
-    <Link href={{ pathname: `${restaurantData.id}`, params: { id: restaurantData.id } }} asChild>
       <Pressable className={styles.cardContainer}>
         <View>
           <Image
-            source={{ uri: restaurantData.profileImage }}
+            source={{ uri: dummyRestaurantsData[0].profileImage }}
             className={styles.cardImage}
             resizeMode="cover"
           />
           <View className={styles.overlay}>
-            <Text className={styles.overlayText}>{restaurantData.delivery} min</Text>
+            <Text className={styles.overlayText}>{dummyRestaurantsData[0].delivery} min</Text>
           </View>
         </View>
 
         <View className={styles.textsContainer}>
-          <Text className={styles.restaurantName}>{restaurantData.name}</Text>
+          <Text className={styles.restaurantName}>{dummyRestaurantsData[0].name}</Text>
           <View className={styles.ratingContainer}>
-            <FontAwesome name="star" size={17} color={ratingStyle.color} />
-            <Text className={styles.rating}>{restaurantData.rating}</Text>
+            <FontAwesome name="star" size={17} color={'black'} />
+            <Text className={styles.rating}>{dummyRestaurantsData[0].rating}</Text>
           </View>
         </View>
-        <Text className={styles.price}>{restaurantData.price} €</Text>
+        <Text className={styles.price}>{dummyRestaurantsData[0].price} €</Text>
       </Pressable>
-    </Link>
+
   );
 };
 

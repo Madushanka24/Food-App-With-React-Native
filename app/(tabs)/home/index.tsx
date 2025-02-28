@@ -16,6 +16,10 @@ const HomeScreen = () => {
       </View>
 
       <MarketCard />
+      <MarketCard />
+      <MarketCard />
+      <MarketCard />
+      
     </SafeAreaView>
   );
 };
